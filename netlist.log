@@ -1,0 +1,157 @@
+; Top Design: "LNA_design_lib:A3_X_band_LNA_sweepable:schematic"
+; Netlisted using Hierarchy Policy: "Standard"
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="LNA_design_lib:A3_X_band_LNA_sweepable:schematic" DcopOutputNodeVoltages=yes DcopOutputPinCurrents=yes DcopOutputAllSweepPoints=no DcopOutputDcopType=0
+; Library Name: LNA_design_lib
+; Cell Name: First_Stage_FET_Structure_progOpt1_v1
+; View Name: schematic
+define First_Stage_FET_Structure_progOpt1_v1 ( P1  P2 ) 
+;parameters 
+R:R3  N__1 0 R=FET1_R2 Ohm Noise=yes 
+R:R5  N__2 N__3 R=FET1_R1 Ohm Noise=yes 
+MLIN2:TL18  N__4 N__1 Subst="MSub1" W=10 um L=FET1_L3 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL17  N__5 N__2 Subst="MSub1" W=10 um L=FET1_L1 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL19  N__3 N__6 Subst="MSub1" W=10 um L=FET1_L2 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+#uselib "ckt" , "S2PMDIF"
+S2PMDIF:S3  P1 0 N__5 0 File="fettm_noise.mdf" Type="s2pmdif" InterpMode="linear" InterpDom="ri" ExtrapMode="interpMode" CheckPassivity=0 iVar1=SAMPLE iVal1=sample iVar2="Vds" iVal2=4.0 iVar3="Ids" iVal3=0.02 
+MTEE:Tee2  N__6 P2 N__4 Subst="MSub1" W1=10 um W2=10 um W3=10 um 
+end First_Stage_FET_Structure_progOpt1_v1
+
+; Library Name: LNA_design_lib
+; Cell Name: Input_matching_network_progOpt1_v1
+; View Name: schematic
+define Input_matching_network_progOpt1_v1 ( P1  P2 ) 
+;parameters 
+MLOC2:TL3  N__0 Subst="MSub1" W=30 um L=3270 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+R:R1  N__0 0 R=Inp_R1 Ohm Noise=yes 
+MLIN2:TL16  N__3 P2 Subst="MSub1" W=5 um L=Inp_L3 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLSC2:TL20  N__4 Subst="MSub1" W=5 um L=Inp_L1 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+C:C1  N__5 N__6 C=Inp_C1 
+MLIN2:TL21  N__5 N__7 Subst="MSub1" W=Inp_W2 um L=Inp_L2 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL23  N__10 N__6 Subst="MSub1" W=10 um L=30 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MTEE:Tee2  N__9 N__10 N__4 Subst="MSub1" W1=25 um W2=10 um W3=5 um 
+MLIN2:TL22  P1 N__9 Subst="MSub1" W=25 um L=50 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL1  N__12 N__0 Subst="MSub1" W=10 um L=3400 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MTEE:Tee1  N__7 N__3 N__12 Subst="MSub1" W1=10 um W2=10 um W3=10 um 
+end Input_matching_network_progOpt1_v1
+
+; Library Name: LNA_design_lib
+; Cell Name: Interstage_matching_network_progOpt1_v1
+; View Name: schematic
+define Interstage_matching_network_progOpt1_v1 ( P1  P2 ) 
+;parameters 
+MLIN2:TL35  N__2 P1 Subst="MSub1" W=10 um L=Int_L1 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL38  P2 N__5 Subst="MSub1" W=10 um L=Int_L4 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+C:C4  N__5 N__7 C=Int_C1 pF 
+MLIN2:TL28  N__9 N__8 Subst="MSub1" W=10 um L=Int_L3 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL36  N__11 N__10 Subst="MSub1" W=10 um L=Int_L2 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MTEE:Tee5  N__11 N__12 N__9 Subst="MSub1" W1=10 um W2=10 um W3=10 um 
+MLIN2:TL34  N__7 N__12 Subst="MSub1" W=10 um L=50 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+C:C8  0 N__8 C=200 pF 
+MRIND:L2  N__2 N__10 Subst="MSub1" N=1.0 L1=140 um L2=140 um W=10 um S=20 um 
+end Interstage_matching_network_progOpt1_v1
+
+; Library Name: LNA_design_lib
+; Cell Name: Output_matching_network_progOpt1_v1
+; View Name: schematic
+define Output_matching_network_progOpt1_v1 ( P1  P2 ) 
+;parameters 
+MLOC2:TL47  P1 Subst="MSub1" W=30 um L=Out_L1 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLOC2:TL48  N__1 Subst="MSub1" W=30 um L=Out_L5 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+C:C6  N__3 N__4 C=Out_C1 pF 
+MLIN2:TL42  P2 N__3 Subst="MSub1" W=Out_W7 um L=Out_L7 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL49  N__4 N__6 Subst="MSub1" W=15 um L=Out_L6 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL44  N__8 N__7 Subst="MSub1" W=25 um L=Out_L4 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL45  N__10 N__9 Subst="MSub1" W=10 um L=Out_L3 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL46  N__11 P1 Subst="MSub1" W=10 um L=Out_L2 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MTEE:Tee6  N__11 N__7 N__10 Subst="MSub1" W1=10 um W2=15 um W3=10 um 
+MTEE:Tee7  N__6 N__8 N__1 Subst="MSub1" W1=15 um W2=25 um W3=30 um 
+C:C7  0 N__9 C=200 pF 
+end Output_matching_network_progOpt1_v1
+
+; Library Name: LNA_design_lib
+; Cell Name: Second_Stage_FET_Structure_progOpt1_v1
+; View Name: schematic
+define Second_Stage_FET_Structure_progOpt1_v1 ( P1  P2 ) 
+;parameters 
+MLOC2:TL26  N__3 Subst="MSub1" W=30 um L=3000 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+R:R6  N__5 0 R=FET2_R3 Ohm Noise=yes 
+R:R7  N__6 N__7 R=FET2_R2 Ohm Noise=yes 
+R:R8  N__3 0 R=FET2_R1 Ohm Noise=yes 
+MLIN2:TL22  N__8 N__5 Subst="MSub1" W=10 um L=FET2_L4 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL27  N__7 N__9 Subst="MSub1" W=10 um L=FET2_L3 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL23  N__10 N__6 Subst="MSub1" W=10 um L=FET2_L2 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MLIN2:TL24  N__12 N__11 Subst="MSub1" W=10 um L=FET2_L1 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+MTEE:Tee3  N__9 P2 N__8 Subst="MSub1" W1=10 um W2=10 um W3=10 um 
+#uselib "ckt" , "S2PMDIF"
+S2PMDIF:S4  N__11 0 N__10 0 File="fettm_noise.mdf" Type="s2pmdif" InterpMode="linear" InterpDom="ri" ExtrapMode="interpMode" CheckPassivity=0 iVar1=SAMPLE iVal1=sample iVar2="Vds" iVal2=4.0 iVar3="Ids" iVal3=0.02 
+MTEE:Tee4  P1 N__12 N__14 Subst="MSub1" W1=10 um W2=10 um W3=10 um 
+MLIN2:TL25  N__14 N__3 Subst="MSub1" W=10 um L=3400 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
+end Second_Stage_FET_Structure_progOpt1_v1
+
+S_Param:Sweep CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=yes SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 \
+SweepVar="freq" SweepPlan="Sweep_stim" OutputPlan="Sweep_Output" 
+
+SweepPlan: Sweep_stim Start=1 GHz Stop=11 GHz Step=50 MHz 
+
+OutputPlan:Sweep_Output \
+      Type="Output" \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2
+
+#load "python","LinearCollapse"
+Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2
+
+Out_L1=211.452 noopt{ 30 to 600 }
+Out_L2=387.96 noopt{ 30 to 600 }
+Out_L3=743.006 noopt{ 30 to 2000 }
+Out_L4=915.802 noopt{ 30 to 2000 }
+Out_L5=496.886 noopt{ 30 to 2000 }
+Out_L6=19.8272 noopt{ 3 to 200 }
+Out_L7=190.885 noopt{ 50 to 900 }
+Out_W7=16.0688 noopt{ 5 to 30 }
+Out_C1=.375347 noopt{ .1 to 5 }
+model MSub1 MSUB H=100 um Er=12.9 Mur=1 Cond=1.0E+50 Hu=1.0E+30 meter T=1.5 um TanD=0 Rough=0 meter DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
+
+sample=1
+SAMPLE="sample"
+nRows=42
+
+First_Stage_FET_Structure_progOpt1_v1:X2  N__10 N__9 
+Second_Stage_FET_Structure_progOpt1_v1:X4  N__8 N__4 
+Port:Term1  N__5 0 Num=1 Z=50 Ohm Noise=yes 
+Port:Term2  N__15 0 Num=2 Z=50 Ohm Noise=yes 
+Input_matching_network_progOpt1_v1:X1  N__5 N__10 
+Interstage_matching_network_progOpt1_v1:X3  N__9 N__8 
+Output_matching_network_progOpt1_v1:X5  N__4 N__15
+
+FET2_L1=261.487 noopt{ 10 to 550 }
+FET2_R1=25 noopt{ 25 to 30 }
+FET2_R2=20 noopt{ 20 to 25 }
+FET2_R3=150 noopt{ 150 to 200 }
+FET2_L2=176.628 noopt{ 10 to 250 }
+FET2_L3=24.7259 noopt{ 2 to 250 }
+FET2_L4=98.0301 noopt{ 2 to 250 }
+
+Int_L1=303.456 noopt{ 50 to 350 }
+Int_L2=102.648 noopt{ 20 to 350 }
+Int_L3=705.714 noopt{ 200 to 900 }
+Int_L4=169.952 noopt{ 10 to 350 }
+Int_C1=1.17012 noopt{ .1 to 5 }
+
+FET1_L1=158.105 noopt{ 2 to 250 }
+FET1_R1=25 noopt{ 25 to 30 }
+FET1_R2=150 noopt{ 150 to 200 }
+FET1_L2=165.367 noopt{ 2 to 250 }
+FET1_L3=100.199 noopt{ 30 to 250 }
+
+Inp_L2=17.2666 opt{ 10 to 900 }
+Inp_R1=25 opt{ 10 to 900 }
+Inp_L1=1064.12 opt{ 600 to 3000 }
+Inp_W2=13.8343 opt{ 5 to 25 }
+Inp_L3=268.891 opt{ 10 to 650 }
+Inp_C1=3.66185 opt{ .1 to 50 }
+ 
+aele A = write_var("specs.txt","W","! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));
