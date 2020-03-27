@@ -48,13 +48,7 @@ sed "$s" $3 > $4
 # # change the fourth argument
 # echo 's/\(.*'$1'\)\([^'$6']*'$6'\)\([^'$6']*'$6'\)\([^'$6']*'$6'\)[^'$6']*\('$6'.*\)/\1\2\3\4'$2'\5/'
 
-####### please refer to netlist.log and duplicate.txt as template files for the following tests
-# # standard input using " " as seperator
-# # before:		aele A = write_var("specs.txt" "W" "! Freq dB(S21) dB(S22) NF(2)" "\t");
-# # after:		aele A = write_var("first!" "W" "! Freq dB(S21) dB(S22) NF(2)" "\t");
-# ./sedfile_auto.sh 'var(' 'first!' duplicate.txt newdup.txt 1 " "
-
-# # standard input using "," as seperator with double quotes '"'
+####### please refer to netlist.log as template file for the following test cases
 # # before: 	aele A = write_var(specs.txt,W,! Freq dB(S21) dB(S22) NF(2),\t);
 # # after:		aele A = write_var("spec_1.txt",W,! Freq dB(S21) dB(S22) NF(2),\t);
 # ./sedfile_auto.sh 'var(' '"second!"' netlist.log newnet.txt 2 ","
