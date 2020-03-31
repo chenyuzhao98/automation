@@ -1,17 +1,15 @@
 # Automation
-The purpose of this project is to use regular expression and the sed function to automate the process of adjusting variables. 
+The purpose of this project is to use regular expression and the sed function to automate the process of adjusting variables. Please refer to netlist.log as template file for the following test cases  
 
-# please refer to netlist.log as template file for the following test cases
+# case1: changing the 2nd argument using comma "," as seperator, manually adding the double quotation marks around 'second!'  
+before:		aele A = write_var("specs.txt","W","! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));  
+after: 		aele A = write_var("specs.txt","second!","! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));  
+./sedfile_auto.sh 'var(' '"second!"' netlist.log newnet.txt 2 ","  
 
-# case1: changing the 2nd argument using comma "," as seperator, manually adding the double quotation marks around 'second!'
-before:		aele A = write_var("specs.txt","W","! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));
-after: 		aele A = write_var("specs.txt","second!","! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));
-./sedfile_auto.sh 'var(' '"second!"' netlist.log newnet.txt 2 ","
-
-# case2: using "," as seperator, but without adding double quotation marks
-before:		aele A = write_var("specs.txt","W","! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));
-after: 		aele A = write_var("specs.txt",second!,"! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));
-./sedfile_auto.sh var\( second\! netlist.log newnet.txt 2 ","
+# case2: using "," as seperator, but without adding double quotation marks  
+before:		aele A = write_var("specs.txt","W","! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));  
+after: 		aele A = write_var("specs.txt",second!,"! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));  
+./sedfile_auto.sh var\( second\! netlist.log newnet.txt 2 ","  
 
 # case3: changing the 1st argument (immediately after $1) using space " " as seperator
 before: 	MLIN2:TL18  N__4 N__1 Subst="MSub1" W=10 um L=FET1_L3 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1 
