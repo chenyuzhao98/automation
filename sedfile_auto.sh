@@ -34,11 +34,9 @@ function autosed {
 }
 
 # Please refer to README for test case explanation
-autosed 'var(' '"second!"' netlist.log newnet.txt 2 ","
-# autosed var\( second\! netlist.log newnet.txt 2 ","
-# autosed 'MLIN2:TL18  ' 'N__999' netlist.log newnet.txt 1 " "
-# autosed 'MLIN2:TL18' 'N__999' netlist.log newnet.txt 1 " "
-# autosed 'MLIN2:TL18    ' 'N__999' netlist.log newnet.txt 1 " "
-# autosed 'MLOC2:TL3  ' 'W=999' netlist.log newnet.txt 3 " "
-# autosed 'S2PMDIF:S4  ' 'Type="CHANGED"' netlist.log newnet.txt 6 " "
-# autosed 'FET2_L1=' '99.99' netlist.log newnet.txt 1 " "
+autosed 'foo(' '"second!"' targetfile.txt output.txt 2 ","
+# autosed foo1\( third\! targetfile.txt output.txt 3 ","
+# autosed 'foo2(' '999' targetfile.txt output.txt 1 " "
+# autosed 'foobar( ' 'FIRST' targetfile.txt output.txt 1 " "
+# autosed 'foobar(			' 'FIRST' targetfile.txt output.txt 1 " "
+# autosed 'FOOBAR:' 'Bar="BAR!"' targetfile.txt output.txt 3 " "
