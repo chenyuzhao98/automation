@@ -2,28 +2,35 @@
 The purpose of this project is to use regular expression and the sed function to automate the process of adjusting variables. Please refer to netlist.log as template file for the following test cases  
 
 #### Case1: changing the 2nd argument using comma "," as seperator, manually adding the double quotation marks around 'second!'  
-Before:		aele A = write_var("specs.txt","W","! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));<br/>
-After: 		aele A = write_var("specs.txt","second!","! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));<br/>
+#####Before:  
+f0 = foo("a","b","c","d")  
+#####After:  
+f0 = foo("a","second","c","d")  
 ```
-autosed 'var(' '"second!"' netlist.log newnet.txt 2 ","
+autosed 'foo(' '"second!"' targetfile.txt output.txt 2 ","
 ```
 
 #### Case2: using "," as seperator, but without adding double quotation marks  
-Before:		aele A = write_var("specs.txt","W","! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));<br/>
-After: 		aele A = write_var("specs.txt",second!,"! Freq dB(S21) dB(S22) NF(2)","\t", , , freq,dB(S21),dB(S11),nf(2));<br/>
+#####Before:  
+f1 = foo1(a,b,c,d)  
+#####After:  
+f1 = foo1(a,b,third!,d)
 ```
-autosed var\( second\! netlist.log newnet.txt 2 ","  
+autosed foo1\( third\! targetfile.txt output.txt 3 ","
 ```
 
 #### Case3: changing the 1st argument (immediately after $1) using space " " as seperator
-Before: 	MLIN2:TL18  N__4 N__1 Subst="MSub1" W=10 um L=FET1_L3 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1<br/>
-After: 		MLIN2:TL18  N__999 N__1 Subst="MSub1" W=10 um L=FET1_L3 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1<br/>
+#####Before:  
+f2 = foo2(a b c d)  
+#####After:  
+f2 = foo2(999 b c d)  
 ```
-autosed 'MLIN2:TL18  ' 'N__999' netlist.log newnet.txt 1 " "
+autosed 'foo2(' '999' targetfile.txt output.txt 1 " "
 ```
 
 #### Case4: please make sure the trailing spacing in $1 must be exact, otherwise it won't work
-Before: 	MLIN2:TL18  N__4 N__1 Subst="MSub1" W=10 um L=FET1_L3 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1<br/>
+Before:  
+f3 = foobar( a b c d)
 After: 		MLIN2:TL18N__4 N__1 Subst="MSub1" W=10 um L=FET1_L3 um Wall1=2.5e+025 meter Wall2=2.5e+025 meter Mod=1<br/>
 ```
 autosed 'MLIN2:TL18' 'N__999' netlist.log newnet.txt 1 " "
