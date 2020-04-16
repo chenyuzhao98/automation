@@ -1,0 +1,6 @@
+f0 = foo("a","b","c","d")
+f1 = foo1(a,b,c,d)
+f2 = foo2(a b c d)
+f3 = foobar( a b c d)
+FOOBAR:CASE=0 Foo="Foo1" Bar=0 
+foobar=0.00
