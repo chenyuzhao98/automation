@@ -1,5 +1,5 @@
 # Automation
-The purpose of this project is to use regular expression and the sed function to automate the process of adjusting variables. Please refer to netlist.log as template file for the following test cases  
+The purpose of this project is to use regular expression and the sed function to automate the process of adjusting variables. Please refer to targetfile.txt as template file for the following test cases  
 
 #### Case1: changing the 2nd argument using comma "," as seperator, manually adding the double quotation marks around 'second!'  
 ###### Before:  
